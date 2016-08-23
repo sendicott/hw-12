@@ -40,7 +40,7 @@ function addNewShop() {
 /*------------------Ancestry API------------------*/
 
 function listOfPeeps() {
-    let request = new XMLHttpRequest;
+    let request = new XMLHttpRequest();
     request.open('GET', 'https://rocky-depths-88529.herokuapp.com/ancestry');
     request.addEventListener('load', function () {
         let peeps = JSON.parse(request.responseText);
@@ -69,10 +69,41 @@ function addNewPeep() {
 
 /*------------------Ancestry API------------------*/
 
+/*------------------Movie API------------------*/
+function listOfMovies() {
+    let request = new XMLHttpRequest();
+    request.open('GET', 'https://secret-springs-58890.herokuapp.com/api');
+    request.addEventListener('load', function() {
+        let movies = JSON.parse(request.responseText);
+        let parent = document.querySelector('#movies-list');
+
+        for (let i = 0; i < movies.length; i++) {
+            let listItem = document.createElement('li');
+            listItem.textContent = movies[i].name + "/" + movies[i].genre + "/" + movies[i].rating;
+            parent.appendChild(listItem);
+        }
+    });
+}
+
+function addNewMovie() {
+    let movies = {
+        name: document.querySelector("#new-movie").value,
+        genre: document.querySelector("#genre").value,
+        rating: document.querySelector("#movie-rating").value,
+    }
+
+    let request = new XMLHttpRequest();
+    request.open('POST', 'https://secret-springs-58890.herokuapp.com/api');
+    request.send(JSON.stringify(movies));
+}
+
+/*------------------Movie API------------------*/
+
 /*------------------Window Listener------------------*/
 window.addEventListener('load', function () {
     listOfShops();
     listOfPeeps();
+    listOfMovies();
 
     let submitBtn = document.querySelector('#add-new-shop');
     submitBtn.addEventListener('click', function () {
@@ -83,6 +114,11 @@ window.addEventListener('load', function () {
     peepSubmitBtn.addEventListener('click', function () {
         addNewPeep();
     });
+
+    let moviesSubmitBtn = document.querySelector('#add-new-movie');
+    moviesSubmitBtn.addEventListener('click', function () {
+        addNewMovie();
+    })
 
     let coffeeSection = document.querySelector('#coffeeSection');
     let coffeeButton = document.querySelector('#coffeeButton');
@@ -101,6 +137,16 @@ window.addEventListener('load', function () {
             ancestrySection.classList.remove("hidden");
         } else if (ancestrySection.className === "") {
             ancestrySection.classList.add("hidden");
+        }
+    });
+
+    let movieSection = document.querySelector('#movieSection');
+    let movieBtn = document.querySelector('#movieButton');
+    movieBtn.addEventListener('click', function () {
+        if (movieSection.className === "hidden") {
+            movieSection.classList.remove("hidden");
+        } else if (movieSection.className === "") {
+            movieSection.classList.add("hidden");
         }
     });
 });
