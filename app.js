@@ -1,4 +1,3 @@
-
 /*------------------Coffee Shops------------------*/
 function dollarfy (x) {
     count = "";
@@ -14,7 +13,8 @@ function listOfShops() {
     request.addEventListener('load', function () {
         let shops = JSON.parse(request.responseText);
         let parent = document.querySelector('#shop-list');
-
+        let count = document.querySelector('#navCoffee');
+        count.textContent = shops.length;
         for (let i = 0; i < shops.length; i++) {
             let listItem = document.createElement('li');
             listItem.innerHTML = shops[i].name + " (" + shops[i].rating + "&#x2606;): " + dollarfy(shops[i].price); 
@@ -45,7 +45,8 @@ function listOfPeeps() {
     request.addEventListener('load', function () {
         let peeps = JSON.parse(request.responseText);
         let parent = document.querySelector('#peeps-list');
-
+        let count = document.querySelector('#navAncestors');
+        count.textContent = peeps.length;
         for (let i = 0; i < peeps.length; i++) {
             let listItem = document.createElement('li');
             listItem.textContent = peeps[i].name + " (" + peeps[i].yearBorn + ") " + "was originally from " + peeps[i].origin + ".";
@@ -76,12 +77,15 @@ function listOfMovies() {
     request.addEventListener('load', function () {
         let movies = JSON.parse(request.responseText);
         let parent = document.querySelector('#movies-list');
+        let count = document.querySelector('#navMovies');
+        count.textContent = movies.length;
         for (let i = 0; i < movies.length; i++) {
             let listItem = document.createElement('li');
             listItem.textContent = movies[i].name + "/" + movies[i].genre + "/" + movies[i].rating;
             parent.appendChild(listItem);
         }
     });
+    request.send()
 }
 
 function addNewMovie() {
