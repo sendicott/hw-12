@@ -1,0 +1,9 @@
+.hidden {
+    visibility: hidden;
+}
+
+section {
+    margin-bottom: 2%;
+    padding-bottom: 2%;
+    border-bottom: 2px solid lightgray;
+}
