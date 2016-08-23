@@ -73,10 +73,9 @@ function addNewPeep() {
 function listOfMovies() {
     let request = new XMLHttpRequest();
     request.open('GET', 'https://secret-springs-58890.herokuapp.com/api');
-    request.addEventListener('load', function() {
+    request.addEventListener('load', function () {
         let movies = JSON.parse(request.responseText);
         let parent = document.querySelector('#movies-list');
-
         for (let i = 0; i < movies.length; i++) {
             let listItem = document.createElement('li');
             listItem.textContent = movies[i].name + "/" + movies[i].genre + "/" + movies[i].rating;
