@@ -46,7 +46,7 @@ function listOfPeeps() {
         let peeps = JSON.parse(request.responseText);
         let parent = document.querySelector('#peeps-list');
 
-        for (let i = 0; i < peeps.lenght; i++) {
+        for (let i = 0; i < peeps.length; i++) {
             let listItem = document.createElement('li');
             listItem.textContent = peeps[i].name + " (" + peeps[i].yearBorn + ") " + "was originally from " + peeps[i].origin + ".";
             parent.appendChild(listItem);
